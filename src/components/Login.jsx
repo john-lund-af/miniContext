@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import UserContext from '../context/UserContext';
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const {setUser} = useContext(UserContext)
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -13,11 +16,13 @@ const Login = () => {
   }
 
   const handleSubmit = () => {
+    if(!username || !password)
+      return;
 
+    setUser({username, password});
   }
 
   return (
-
     <div>
       <h2>Login</h2>
       <input type="text" name="username" id="username" value={username} onChange={handleUsername} />
